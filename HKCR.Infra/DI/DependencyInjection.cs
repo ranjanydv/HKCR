@@ -41,7 +41,7 @@ public static class DependencyInjection
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
         services.AddTransient<IDateTime, DateTimeService>();
-        // services.AddTransient<IAuthentication, AuthenticationService>();
+        services.AddTransient<IAuthentication, AuthenticationService>();
 
         services.AddTransient<IUserDetails, UserDetails>();
 

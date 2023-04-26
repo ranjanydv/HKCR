@@ -19,8 +19,9 @@ var builder = WebApplication.CreateBuilder(args);
         options.AddPolicy(name: myAllowSpecificOrigins,
             policy =>
             {
-                policy.WithOrigins("https://localhost:7179/",
-                    "http://localhost:5128/");
+                // policy.WithOrigins("https://localhost:7179/",
+                //     "http://localhost:5128/");
+                policy.WithOrigins("*");
             });
     });
 }

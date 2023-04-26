@@ -22,7 +22,7 @@ public class User : BaseEntity
     public string Password { get; set; }
     public string Phone { get; set; }
     public string Address { get; set; }
-    public UserRole? Role { get; set; } = UserRole.User;
+    public UserRole Role { get; set; } = UserRole.User;
 
     // [ForeignKey("Department")]
     // public int DepartmentId { get; set; }
