@@ -25,7 +25,8 @@ namespace HKCR.Infra.Services
                 CarLastRented = car.CarLastRented,
                 CarModel = car.CarModel,
                 CarRentalRate = car.CarRentalRate,
-                CarNoOfRent = car.CarNoOfRent
+                CarNoOfRent = car.CarNoOfRent,
+                CarImage = car.CarImage
             };
 
             await _dbContext.Cars.AddAsync(carDetails);
@@ -40,7 +41,8 @@ namespace HKCR.Infra.Services
                 CarLastRented = carDetails.CarLastRented,
                 CarModel = carDetails.CarModel,
                 CarRentalRate = carDetails.CarRentalRate,
-                CarNoOfRent = carDetails.CarNoOfRent
+                CarNoOfRent = carDetails.CarNoOfRent,
+                CarImage = carDetails.CarImage
             };
             return result;
         }

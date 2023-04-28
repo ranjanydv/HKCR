@@ -7,6 +7,7 @@ public interface IApplicationDbContext
 {
     DbSet<User> User { get; set; }
     DbSet<Cars> Cars { get; set; }
+    DbSet<Document> Document { get; set; }
 
     // DbSet<Department> Department { get; set; }
     // DbSet<SalaryOrBonus> SalaryOrBonus { get; set; }

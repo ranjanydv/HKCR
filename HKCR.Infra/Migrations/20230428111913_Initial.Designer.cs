@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HKCR.Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230428093710_Car")]
-    partial class Car
+    [Migration("20230428111913_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,8 @@ namespace HKCR.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CarAvailability")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("CarAvailability")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CarBrand")
                         .IsRequired()
@@ -42,9 +41,8 @@ namespace HKCR.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CarLastRented")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime?>("CarLastRented")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CarModel")
                         .IsRequired()
@@ -65,6 +63,24 @@ namespace HKCR.Infra.Migrations
                     b.HasKey("CarID");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("HKCR.Domain.Entities.Document", b =>
+                {
+                    b.Property<Guid>("DocID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DocImage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("DocType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("DocID");
+
+                    b.ToTable("Document");
                 });
 
             modelBuilder.Entity("HKCR.Domain.Entities.User", b =>
@@ -88,6 +104,10 @@ namespace HKCR.Infra.Migrations
 
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DocId")
+                        .IsRequired()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -118,6 +138,8 @@ namespace HKCR.Infra.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocId");
 
                     b.ToTable("User");
                 });
@@ -250,14 +272,14 @@ namespace HKCR.Infra.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "185a0c16-24af-4d13-abb4-aa2f8494642b",
+                            ConcurrencyStamp = "60bed42a-94d9-4157-a350-8c2a2aae05fd",
                             Email = "admin@hajur.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@HAJUR.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEEmnPKSpqf0mDx4eP7noNMSj4Z23GBwzNENrWdy90ZucSrXM6ewNEX2BI9thqg2Lw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHBnC2ukoMSLrfnuCeKSlCIEdf2WxHZvC/H3bSQX7fvfe5AlNm8J2nhW9ahO1OQCyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf78f669-7374-42e0-a47f-0b42a5b572a0",
+                            SecurityStamp = "53feeaa3-ebdc-4a2b-9b19-b250bfeab53f",
                             TwoFactorEnabled = false,
                             UserName = "Hajur Ko Admin"
                         });
@@ -349,6 +371,17 @@ namespace HKCR.Infra.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("HKCR.Domain.Entities.User", b =>
+                {
+                    b.HasOne("HKCR.Domain.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
