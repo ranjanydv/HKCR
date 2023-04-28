@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HKCR.Domain.Shared;
 
@@ -26,6 +26,7 @@ public class User : BaseEntity
     public UserRole Role { get; set; } = UserRole.User;
 
     [ForeignKey("Document")]
+
     public Guid DocId { get; set; }
     public virtual Document Document { get; set; }
 

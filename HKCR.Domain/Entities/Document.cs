@@ -1,4 +1,4 @@
-﻿using HKCR.Domain.Shared;
+using HKCR.Domain.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,14 @@ namespace HKCR.Domain.Entities
 {
     public class Document
     {
+        public Guid DocID { get; set; } = new Guid();
+        public string DocName { get; set; }
+        public string DocType { get; set;}
+        public string DocImage { get; set; }
 
-        public Guid DocId { get; set; } = new Guid();
-        public string Type { get; set; }
-        public string DocPath { get; set; }
+        //[ForeignKey("User")]
+        //public Guid UserId { get; set; }
+        //public virtual User User { get; set; }
 
-        // [ForeignKey("Department")]
-        // public int DepartmentId { get; set; }
-        // public virtual Department Department { get; set; }
     }
 }
