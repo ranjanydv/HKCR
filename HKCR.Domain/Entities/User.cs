@@ -25,12 +25,10 @@ public class User : BaseEntity
     public string Address { get; set; }
     public UserRole Role { get; set; } = UserRole.User;
 
-    [ForeignKey("Document")]
 
-    public Guid DocId { get; set; }
-    public virtual Document Document { get; set; }
+    //[ForeignKey("Document")]
+    //public Guid DocId { get; set; }
+    //public virtual Document Document { get; set; }
 
-    // [ForeignKey("Department")]
-    // public int DepartmentId { get; set; }
-    // public virtual Department Department { get; set; }
+    
 }
