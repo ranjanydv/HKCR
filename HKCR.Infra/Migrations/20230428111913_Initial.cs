@@ -50,27 +50,35 @@ namespace HKCR.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Cars",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false),
-                    Phone = table.Column<string>(type: "text", nullable: false),
-                    Address = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<int>(type: "integer", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastModifiedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    CarID = table.Column<Guid>(type: "uuid", nullable: false),
+                    CarName = table.Column<string>(type: "text", nullable: false),
+                    CarBrand = table.Column<string>(type: "text", nullable: false),
+                    CarModel = table.Column<string>(type: "text", nullable: false),
+                    CarColor = table.Column<string>(type: "text", nullable: false),
+                    CarRentalRate = table.Column<string>(type: "text", nullable: false),
+                    CarAvailability = table.Column<int>(type: "integer", nullable: false),
+                    CarNoOfRent = table.Column<string>(type: "text", nullable: false),
+                    CarLastRented = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Cars", x => x.CarID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Document",
+                columns: table => new
+                {
+                    DocID = table.Column<Guid>(type: "uuid", nullable: false),
+                    DocType = table.Column<int>(type: "integer", nullable: false),
+                    DocImage = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Document", x => x.DocID);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,6 +187,37 @@ namespace HKCR.Infra.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Phone = table.Column<string>(type: "text", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    DocId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    LastModifiedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    DeletedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_Document_DocId",
+                        column: x => x.DocId,
+                        principalTable: "Document",
+                        principalColumn: "DocID",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -187,7 +226,7 @@ namespace HKCR.Infra.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "e2e08a76-de83-4681-b4f8-20ac73bcd29d", "admin@hajur.com", true, false, null, null, "ADMIN@HAJUR.COM", "AQAAAAEAACcQAAAAEIXp1y6QlkF9IR1gl/5hxZ1JRYRM9w4th3Tz15Z1tI4nYWSJ3DC/rMm8459KklJp0w==", null, false, "c9e751fa-0819-4181-b756-72dfaa0f6810", false, "Hajur Ko Admin" });
+                values: new object[] { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "60bed42a-94d9-4157-a350-8c2a2aae05fd", "admin@hajur.com", true, false, null, null, "ADMIN@HAJUR.COM", "AQAAAAEAACcQAAAAEHBnC2ukoMSLrfnuCeKSlCIEdf2WxHZvC/H3bSQX7fvfe5AlNm8J2nhW9ahO1OQCyw==", null, false, "53feeaa3-ebdc-4a2b-9b19-b250bfeab53f", false, "Hajur Ko Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -230,6 +269,11 @@ namespace HKCR.Infra.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_DocId",
+                table: "User",
+                column: "DocId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -250,6 +294,9 @@ namespace HKCR.Infra.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Cars");
+
+            migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
@@ -257,6 +304,9 @@ namespace HKCR.Infra.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Document");
         }
     }
 }

@@ -19,7 +19,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
 
     public DbSet<User> User { get; set; }
     public DbSet<Cars> Cars { get; set; }
-   
+    public DbSet<Document> Document { get; set; }
+
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
@@ -45,16 +46,19 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Cars>().HasKey(c => c.CarID);
+        builder.Entity<Document>().HasKey(d => d.DocID);
 
-        //     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Cars>()
-        //        .HasKey(e => e.CarID);
-        //}
-        builder.Entity<Cars>().HasKey(abcd => abcd.CarID);
+        // Configure the foreign key between User and Document entities
+        builder.Entity<User>()
+            .HasOne(u => u.Document)
+            .WithMany()
+            .HasForeignKey(u => u.DocId)
+            .OnDelete(DeleteBehavior.SetNull);
 
-    var ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
+        var ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
         var ROLE_ID = "341743f0-asd2–42de-afbf-59kmkkmk72cf6";
+
 
         //seed admin role
         builder.Entity<IdentityRole>().HasData(new IdentityRole
@@ -72,7 +76,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
             Email = "admin@hajur.com",
             EmailConfirmed = true,
             UserName = "Hajur Ko Admin",
-            NormalizedUserName = "ADMIN@HAJUR.COM"
+            NormalizedEmail = "ADMIN@HAJUR.COM",
+            NormalizedUserName = "HAJUR KO ADMIN"
         };
 
         //set user password
