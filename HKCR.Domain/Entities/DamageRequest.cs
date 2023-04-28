@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HKCR.Domain.Entities
 {
-    internal class DamageRequest
+    public class DamageRequest
     {
         public Guid DamageId { get; set; }= new Guid();
         public string DamageDescription { get; set; }
