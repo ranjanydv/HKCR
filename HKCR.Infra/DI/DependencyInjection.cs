@@ -43,6 +43,7 @@ public static class DependencyInjection
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IAuthentication, AuthenticationService>();
         services.AddTransient<ICarDetails, CarDetails>();
+        services.AddTransient<IDocDetails, DocDetails>();
 
         services.AddTransient<IUserDetails, UserDetails>();
 
