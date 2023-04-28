@@ -2,7 +2,7 @@
 
 namespace HKCR.Application.Common.DTO;
 
-public class UserRequestDto
+public abstract class UserRequestDto
 {
     // public DateTime JoinDate { get; set; }
     // public string Designation { get; set; }
@@ -11,7 +11,7 @@ public class UserRequestDto
 
     public string Name { get; set; }
     public string Email { get; set; }
-    public string Pass { get; set; }
+    public string Password { get; set; }
     public string Phone { get; set; }
     public string Address { get; set; }
     public UserRole Role { get; set; }

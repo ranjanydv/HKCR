@@ -13,12 +13,41 @@ public class UserDetails : IUserDetails
         _dbContext = dBContext;
     }
 
+
+    // nonsense 
+    public Task<List<UserResponseDto>> GetAllUserAsync()
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<List<UserResponseDto>> GetAllUser()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<UserResponseDto> AddUserDetails(UserResponseDto user)
+
+    public async Task<UserResponseDto> AddUserDetails(UserRequestDto user)
+    {
+        var userDetails = new User()
+        {
+            Name = user.Name,
+            Email = user.Email,
+            Password = user.Password
+        };
+        await _dbContext.User.AddAsync(userDetails);
+        await _dbContext.SaveChangesAsync(default(CancellationToken));
+
+        var result = new UserResponseDto()
+        {
+            Role = userDetails.Role,
+            Phone = userDetails.Phone,
+            Address = userDetails.Address
+        };
+        return result;
+    }
+
+
+    public async Task<UserResponseDto> AddUserDetailsAsync(UserResponseDto user)
     {
         var userDetails = new User()
         {
