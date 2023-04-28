@@ -33,7 +33,7 @@ public class AuthenticationService : IAuthentication
             return new ResponseDto
             {
                 Status = "Error", Message = "User creation failed! Please check user details and try again."
-            };
+              };
 
         return new ResponseDto { Status = "Success", Message = "User created successfully!" };
     }

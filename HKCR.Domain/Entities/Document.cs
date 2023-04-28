@@ -1,6 +1,6 @@
-﻿using System;
+using HKCR.Domain.Shared;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +17,6 @@ namespace HKCR.Domain.Entities
         //[ForeignKey("User")]
         //public Guid UserId { get; set; }
         //public virtual User User { get; set; }
+
     }
 }

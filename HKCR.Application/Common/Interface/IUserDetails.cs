@@ -1,8 +1,10 @@
-﻿namespace HKCR.Application.Common.Interface;
+﻿using HKCR.Application.Common.DTO;
+
+namespace HKCR.Application.Common.Interface;
 
 public interface IUserDetails
 {
-    // Task<List<UserResponseDTO>> GetAllUserAsync();
-    // Task<List<UserResponseDTO>> GetAllUser();
-    // Task<UserResponseDTO> AddUserDetails(UserRequestDTO user);
+    Task<List<UserResponseDto>> GetAllUserAsync();
+    Task<List<UserResponseDto>> GetAllUser();
+    Task<UserResponseDto> AddUserDetails(UserRequestDto user);
 }
