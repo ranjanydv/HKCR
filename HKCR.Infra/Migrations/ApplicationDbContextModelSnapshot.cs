@@ -69,7 +69,7 @@ namespace HKCR.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("Role")
+                    b.Property<int>("Role")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -205,14 +205,14 @@ namespace HKCR.Infra.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2e08a76-de83-4681-b4f8-20ac73bcd29d",
+                            ConcurrencyStamp = "03644e0b-48f7-4959-af5a-b2f32fa162e1",
                             Email = "admin@hajur.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@HAJUR.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIXp1y6QlkF9IR1gl/5hxZ1JRYRM9w4th3Tz15Z1tI4nYWSJ3DC/rMm8459KklJp0w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKcjGiT7lx0CuEto5+o5IVh6vXAdUv2+1GVnAQON7EKcFoHiF8w5JNOr5ln6oHC92w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c9e751fa-0819-4181-b756-72dfaa0f6810",
+                            SecurityStamp = "e635e68d-07f6-4424-b13f-436d8507d7dd",
                             TwoFactorEnabled = false,
                             UserName = "Hajur Ko Admin"
                         });

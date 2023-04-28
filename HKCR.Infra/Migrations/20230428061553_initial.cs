@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HKCR.Infra.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,7 @@ namespace HKCR.Infra.Migrations
                     Password = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<int>(type: "integer", nullable: true),
+                    Role = table.Column<int>(type: "integer", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     DeletedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -187,7 +187,7 @@ namespace HKCR.Infra.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "e2e08a76-de83-4681-b4f8-20ac73bcd29d", "admin@hajur.com", true, false, null, null, "ADMIN@HAJUR.COM", "AQAAAAEAACcQAAAAEIXp1y6QlkF9IR1gl/5hxZ1JRYRM9w4th3Tz15Z1tI4nYWSJ3DC/rMm8459KklJp0w==", null, false, "c9e751fa-0819-4181-b756-72dfaa0f6810", false, "Hajur Ko Admin" });
+                values: new object[] { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "03644e0b-48f7-4959-af5a-b2f32fa162e1", "admin@hajur.com", true, false, null, null, "ADMIN@HAJUR.COM", "AQAAAAEAACcQAAAAEKcjGiT7lx0CuEto5+o5IVh6vXAdUv2+1GVnAQON7EKcFoHiF8w5JNOr5ln6oHC92w==", null, false, "e635e68d-07f6-4424-b13f-436d8507d7dd", false, "Hajur Ko Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
