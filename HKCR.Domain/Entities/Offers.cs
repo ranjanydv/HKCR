@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HKCR.Domain.Entities
 {
-    internal class Offers
+    public class Offers
     {
         public Guid OfferID { get; set; } = new Guid();
         public string OfferName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HKCR.Domain.Entities
 {
-    internal class Staff
+    public class Staff
     {
         public Guid StaffID { get; set; } = new Guid();
         public string StaffEmail { get; set; }

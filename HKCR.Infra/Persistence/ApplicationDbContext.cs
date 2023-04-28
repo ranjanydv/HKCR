@@ -4,6 +4,7 @@ using HKCR.Domain.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Xml;
 
 namespace HKCR.Infra.Persistence;
 
@@ -17,6 +18,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
     }
 
     public DbSet<User> User { get; set; }
+    public DbSet<Cars> Cars { get; set; }
+   
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
@@ -42,7 +45,15 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        var ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
+
+        //     protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Cars>()
+        //        .HasKey(e => e.CarID);
+        //}
+        builder.Entity<Cars>().HasKey(abcd => abcd.CarID);
+
+    var ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
         var ROLE_ID = "341743f0-asd2–42de-afbf-59kmkkmk72cf6";
 
         //seed admin role

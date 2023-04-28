@@ -1,6 +1,6 @@
 ﻿namespace HKCR.Domain.Entities
 {
-    internal class Cars
+    public class Cars
     {
         public Guid CarID { get; set; } = new Guid();
         public string CarName { get; set; }

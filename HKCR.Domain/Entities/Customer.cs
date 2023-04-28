@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HKCR.Domain.Entities
 {
-    internal class Customer
+    public class Customer
     {
         public Guid CustomerID { get; set; } = new Guid();
         public string CustomerDiscount { get; set; }
